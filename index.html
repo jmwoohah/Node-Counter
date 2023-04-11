@@ -1,0 +1,141 @@
+
+ 
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <style>
+        body{
+            font-family: arial;
+        }
+    </style>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Node Counter</title>
+</head>
+<body>
+    <h3>Breakdown multiple strings into one followed by the number of each particular string</h3>
+    <textarea style="width: 200px; height: 200px; display: inline-block">
+mazda
+mazda 
+mazda
+mazda
+fusion  
+fusion
+    </textarea>
+    <br>
+    <button onclick="executeListRender()" >Render items into counted list</button>
+    <br/>
+
+<script>
+
+
+//count line occurances and append number of occurances next to them 
+function countWordOccurrences(inputString) {
+    const companies = inputString.split("\n");
+    const companyCount = {};
+
+    companies.forEach((company) => {
+        company = company.trim(); // Remove leading/trailing whitespaces
+        if (company !== "") {
+            if (company in companyCount) {
+                companyCount[company]++;
+            } else {
+                companyCount[company] = 1;
+            }
+        }
+    });
+
+    return companyCount;
+}
+
+
+//CREATE AND APPEND REPORT DATA INTO COPYABLE TEXT
+//..........................................................................................................................................
+
+function appendRenderedListToDocument(){
+
+    console.log('running');
+
+    /* input your list here 
+    eg mazda mazda ford kia kia kia kia 
+    */
+    const inputString = document.querySelector('textarea').value;
+
+    //create style tag for all CSS
+    var body = document.querySelector('body');
+    var head = document.querySelector('head');
+    var CSSDoc = document.createElement('style');
+
+    // append/insert HTML elements
+
+    //div container wrap
+    var textContainer = document.createElement('div');
+    textContainer.className = 'summary-data-container';
+
+    //create p where data will live
+    var reportList = document.createElement('p');
+    
+    //capture input data into variable
+    var companyOccurrences = countWordOccurrences(inputString);
+
+    //write the text area input into the textContainer (prior to being appended)
+    for (const company in companyOccurrences) {
+        reportList.innerHTML += `${company}: ${companyOccurrences[company]} <br>`;
+    }
+    //append text container and body container
+    textContainer.appendChild(reportList);
+    body.appendChild(textContainer); // TODO - make for each
+
+    // append/insert CSS code
+    var CSSCode = `
+
+    /* header text */
+    .summary-data-container p{
+        margin-bottom: 15px;
+    }
+
+    .summary-data-container *{
+        font-family: arial;
+        font-size: 18px;
+    }
+
+    .summary-data-container{
+            display: inline-block;
+            background: white;
+            max-width: 100%;
+            transition: all .2s ease;
+            margin: 20px 20px 0px 0px;
+            padding: 20px;
+            user-select: all;
+            cursor: pointer;
+            border-radius: 10px;
+            box-shadow: 0px 0px 7px 1px #cbb3eae6;
+    }
+    .summary-data-container:hover{
+        box-shadow: 0px 0px 13px 3px #cbb3eae6;
+    }
+    `
+    CSSDoc.innerHTML = CSSCode;
+    head.appendChild(CSSDoc);
+}
+
+//execution function, runs for every button click
+function executeListRender(){
+
+    //check for previous data report and delete if there is one present
+    let previousSummaryContainer = document.querySelector('.summary-data-container');
+    let body = document.querySelector('body');
+    if(previousSummaryContainer){
+        body.removeChild(previousSummaryContainer);
+    }
+
+    console.log('running');
+    appendRenderedListToDocument();
+    // countWordOccurrences(inputString);
+}
+
+</script>
+<script defer> executeListRender(); </script>
+</body>
+</html>
