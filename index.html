@@ -1,107 +1,165 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <style>
-      body {
-        font-family: Arial;
-        margin: 0;
-        padding: 0;
-        background-color: #f1f1f1;
-      }
-
-      .container {
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        flex-direction: column;
-        margin-top: 50px;
-      }
-
-      h1 {
-        margin: 0;
-        font-size: 36px;
-        font-weight: bold;
-        text-align: center;
-        color: #333;
-        margin-bottom: 30px;
-      }
-
-      label {
-        font-size: 20px;
-        font-weight: bold;
-        color: #333;
-        margin-bottom: 10px;
-      }
-
-      textarea {
-        width: 300px;
-        height: 200px;
-        padding: 10px;
-        font-size: 18px;
-        border-radius: 5px;
-        border: none;
-        box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
-        resize: none;
-        margin-bottom: 20px;
-      }
-
-      button {
-        font-size: 20px;
-        font-weight: bold;
-        background-color: #333;
-        color: #fff;
-        border: none;
-        border-radius: 5px;
-        padding: 10px 20px;
-        cursor: pointer;
-        transition: all 0.2s ease;
-      }
-
-      button:hover {
-        background-color: #555;
-      }
-
-      .result {
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        flex-direction: column;
-        margin-top: 50px;
-        width: 300px;
-        border-radius: 5px;
-        box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
-        padding: 20px;
-        background-color: #fff;
-        font-size: 18px;
-      }
-
-      .result p {
-        margin: 0;
-        margin-bottom: 10px;
-      }
-    </style>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Node Counter</title>
+    <style>
+/* Typography */
+
+body {
+  font-family: "Roboto", sans-serif;
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 1.5;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: "Montserrat", sans-serif;
+  font-weight: 600;
+  margin-top: 0;
+  margin-bottom: 1rem;
+}
+
+/* Layout */
+
+.container {
+  max-width: 1200px;
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: 15px;
+  padding-right: 15px;
+}
+
+/* Header */
+
+.header {
+  background-color: #292929;
+  color: #ffffff;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem;
+}
+
+.header__logo {
+  display: flex;
+  align-items: center;
+}
+
+.header__title {
+  margin: 0;
+  font-size: 2rem;
+  font-weight: 600;
+  text-transform: uppercase;
+}
+
+.header__nav {
+  display: flex;
+  align-items: center;
+}
+
+.header__button {
+  background-color: #ffffff;
+  color: #292929;
+  border: none;
+  border-radius: 4px;
+  font-size: 1rem;
+  font-weight: 600;
+  padding: 0.75rem 1.5rem;
+  margin-left: 1rem;
+  cursor: pointer;
+  transition: background-color 0.2s ease-in-out;
+}
+
+.header__button:hover {
+  background-color: #f1f1f1;
+}
+
+/* Main */
+
+.main {
+  background-color: #141414;
+  color: #ffffff;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 2rem 0;
+}
+
+.input-section {
+  margin-bottom: 2rem;
+}
+
+.input-section__label {
+  display: block;
+  margin-bottom: 0.5rem;
+  font-size: 1.5rem;
+}
+
+.input-section__textarea {
+  display: block;
+  width: 100%;
+  min-height: 10rem;
+  padding: 0.5rem;
+  font-size: 1rem;
+  line-height: 1.5;
+  border-radius: 4px;
+  border: none;
+  resize: vertical;
+}
+
+.result-section {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+}
+
+.result-section__result {
+  font-size: 2rem;
+  font-weight: 600;
+  text-align: center;
+  padding: 2rem;
+  border-radius: 4px;
+  border: 4px dashed #ffffff;
+}
+
+    </style>
   </head>
   <body>
-    <div class="container">
-      <h1>Node Counter</h1>
-      <label for="text-input">Enter a list of nodes:</label>
-      <textarea id="text-input">
+    <header class="header">
+      <div class="header__logo">
+        <h1 class="header__title">Node Counter</h1>
+      </div>
+      <nav class="header__nav">
+        <button class="header__button" id="count-button">Count Nodes</button>
+      </nav>
+
+    </header>
+    <main class="main">
+      <section class="input-section">
+        <label class="input-section__label" for="text-input">Enter a list of nodes:</label>
+        <textarea class="input-section__textarea" id="text-input">mazda
 mazda
-mazda 
 mazda
 mazda
-fusion  
 fusion
-kia 
+fusion
 kia
 kia
-</textarea>
-      <button id="count-button">Count Nodes</button>
-      <div class="result" id="result"></div>
-    </div>
+kia</textarea>
+      </section>
+      <section class="result-section">
+        <div class="result-section__result" id="result"></div>
+      </section>
+    </main>
 
     <script>
       function countNodes() {
